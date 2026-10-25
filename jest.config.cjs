@@ -1,24 +1,12 @@
-
-module.exports = {
+﻿module.exports = {
   testEnvironment: "jsdom",
-
-  testMatch: ["**/?(*.)+(test).[jt]sx"],
-
+  testMatch: ["<rootDir>/src/**/*.test.jsx"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-
   transform: {
-    "^.+\\.[jt]sx?$": [
-      "babel-jest",
-      {
-        presets: [
-          ["@babel/preset-env", { targets: { node: "current" } }],
-          ["@babel/preset-react", { runtime: "automatic" }],
-        ],
-      },
-    ],
+    "^.+\\.[jt]sx?$": "<rootDir>/jest-transformer.cjs"
   },
-
-  moduleFileExtensions: ["js", "jsx", "json"],
-
-  testPathIgnorePatterns: ["/node_modules/"],
+  moduleNameMapper: {
+    "\\.(css|less|scss|sass)$": "<rootDir>/styleMock.cjs"
+  },
+  clearMocks: true
 };
